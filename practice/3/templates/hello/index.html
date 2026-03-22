@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Приветствие</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body class="body-wrapper">
+    <div class="container">
+        <h1 class="title">{{ greeting }}</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.name }}
+            <button class="button-submit" type="submit">Submit</button>
+        </form>
+
+        {% if form.errors %}
+            <div class="error">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        {{ error }}<br>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

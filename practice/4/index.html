@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+    <link rel="stylesheet" href="./normalize.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="inputs">
+            <input required class="input-count input-count--first-number" type="text">
+            <input required class="input-count input-count--second-number" type="text">
+        </div>
+        <div class="actions">
+            <button class="actions__activity actions__activity--sum">сумма</button>
+            <button class="actions__activity actions__activity--diff">разность</button>
+            <button class="actions__activity actions__activity--multipl">произведение</button>
+            <button class="actions__activity actions__activity--division">деление</button>
+        </div>
+        <div>
+            <input readonly type="textarea" class="result-area">
+        </div>
+    </div>
+</body>
+<script src="script.js" type="module"></script>
+</html>
