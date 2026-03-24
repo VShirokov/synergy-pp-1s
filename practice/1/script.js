@@ -56,11 +56,9 @@ function drawNumber(dateString) {
   chars.forEach((char, index) => {
         const digit = parseInt(char);
         if (isNaN(digit)) {
-          resultLines.forEach((line, i) => {
-            const index = i - 1;
-            resultLines[index] += '   '
+          resultLines.forEach((_line, i) => {
+            resultLines[i] += '   '
           })
-          resultLines[resultLines.length - 1] += ' * '
           return;
         } else {
           const pattern = digits[digit];
@@ -78,44 +76,41 @@ function drawNumber(dateString) {
   resultLines.forEach(line => console.log(line));
 }
 
-function formatDateWithStars(day, mounth, year) {
-  drawNumber(`${day}.${mounth}.${year}`);
-}
-
-function ask(query) {
+function askUser(query) {
   return new Promise((resolve) => {
     inputOutput.question(query, (answer) => resolve(answer.trim()));
   });
 }
 
-  try {
-    const dayStr = await ask('Введите день рождения (1‑31): ');
-    const monthStr = await ask('Введите месяц рождения (1‑12): ');
-    const yearStr = await ask('Введите год рождения (например 1990): ');
+try {
+  const dayStr = await askUser('Введите день рождения (1‑31): ');
+  const monthStr = await askUser('Введите месяц рождения (1‑12): ');
+  const yearStr = await askUser('Введите год рождения (например 1990): ');
 
-    const day = Number(dayStr);
-    const month = Number(monthStr);
-    const year = Number(yearStr);
+  const day = Number(dayStr);
+  const month = Number(monthStr);
+  const year = Number(yearStr);
 
-    if (
-      !Number.isInteger(day)   || day   < 1 || day   > 31 ||
-      !Number.isInteger(month) || month < 1 || month > 12 ||
-      !Number.isInteger(year)  || year  < 1 || year > new Date().getFullYear()
-    ) {
-      throw new Error('Введены некорректные данные даты.');
-    }
-
-    const dayOfWeek = getDayOfWeek(day, month, year);
-    const leap = isLeapYear(year);
-    const age = getCurrentAge(day, month, year);
-
-    console.log('\n--- Результат ---');
-    console.log(`День недели            : ${dayOfWeek}`);
-    console.log(`Год ${year} ${leap ? 'високосный' : 'не високосный'}.`);
-    console.log(`Текущий возраст        : ${age} ${age === 1 ? 'год' : 'лет'}`);
-    console.log(`Дата рождения:\n ${formatDateWithStars(dayStr, monthStr, yearStr)}`);
-  } catch (err) {
-    console.error('Ошибка:', err.message);
-  } finally {
-    inputOutput.close();
+  if (
+    !Number.isInteger(day)   || day   < 1 || day   > 31 ||
+    !Number.isInteger(month) || month < 1 || month > 12 ||
+    !Number.isInteger(year)  || year  < 1 || year > new Date().getFullYear()
+  ) {
+    throw new Error('Введены некорректные данные даты.');
   }
+
+  const dayOfWeek = getDayOfWeek(day, month, year);
+  const leap = isLeapYear(year);
+  const age = getCurrentAge(day, month, year);
+
+  console.log('--- Результат ---');
+  console.log(`День недели: ${dayOfWeek}`);
+  console.log(`Год ${year} ${leap ? 'високосный' : 'не високосный'}.`);
+  console.log(`Текущий возраст: ${age} ${age === 1 ? 'год' : 'лет'}`);
+  console.log('Дата рождения:');
+  console.log(drawNumber(`${dayStr}.${monthStr}.${yearStr}`));
+} catch (err) {
+  console.error('Ошибка:', err.message);
+} finally {
+  inputOutput.close();
+}
