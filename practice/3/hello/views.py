@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
 from .forms import NameForm
 from .models import UserName
 

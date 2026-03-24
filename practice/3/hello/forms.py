@@ -7,5 +7,9 @@ class NameForm(forms.ModelForm):
         model = UserName
         fields = ['name']
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Введите ваше имя', 'maxlength': '100'})
+            'name': forms.TextInput(attrs={
+                'placeholder': 'Введите ваше имя',
+                'maxlength': '100',
+                'autofocus': 'true'
+            })
         }
