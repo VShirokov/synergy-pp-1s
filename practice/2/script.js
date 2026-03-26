@@ -1,10 +1,9 @@
-import {
-    ALARM_TEXT,
-    DISABLED_ATTRIBUTE_STRING,
-    NEGATIVE_RESULT_CLASSNAME,
-    NEUTRAL_RESULT_CLASSNAME,
-    POSITIVE_RESULT_CLASSNAME
-} from "./constants.js";
+const POSITIVE_RESULT_CLASSNAME = 'result--yellow';
+const NEGATIVE_RESULT_CLASSNAME = 'result--green';
+const NEUTRAL_RESULT_CLASSNAME = 'result--red'
+const DISABLED_ATTRIBUTE_STRING = 'disabled';
+
+const ALARM_TEXT = 'Вы достигли экстремального значения'
 
 const plusButton = document.querySelector('.counter--plus');
 const minusButton = document.querySelector('.counter--minus');

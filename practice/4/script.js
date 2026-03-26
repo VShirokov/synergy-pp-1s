@@ -1,4 +1,6 @@
-import { ERROR_CLASSNAME, ERROR_EMPTY_VALUE, ERROR_NOT_NUMBER } from "./constants.js";
+const ERROR_CLASSNAME = 'input-count--error';
+const ERROR_EMPTY_VALUE = 'error-empty-value';
+const ERROR_NOT_NUMBER = 'error-not-number';
 
 const firstInput = document.querySelector('.input-count--first-number');
 const secondInput = document.querySelector('.input-count--second-number');
@@ -49,6 +51,14 @@ function validateInputValues() {
     validateValue(secondInput, 'second input');
 }
 
+function getValues() {
+    const firstNumber = firstInput.value;
+    const secondNumber = secondInput.value;
+    validateInputValues(firstNumber, secondNumber);
+
+    return [firstNumber, secondNumber];
+}
+
 function onChangeInput(event) {
     const { target: {
         value, classList
@@ -77,30 +87,22 @@ firstInput.addEventListener('input', onChangeInput);
 secondInput.addEventListener('input', onChangeInput);
 
 actionSum.addEventListener('click', () => {
-    const firstNumber = firstInput.value;
-    const secondNumber = secondInput.value;
-    validateInputValues(firstNumber, secondNumber);
+    const [firstNumber, secondNumber] = getValues();
 
     resultField.value = Number(firstNumber) + Number(secondNumber);
 });
 actionDiff.addEventListener('click', () => {
-    const firstNumber = firstInput.value;
-    const secondNumber = secondInput.value;
-    validateInputValues(firstNumber, secondNumber);
+    const [firstNumber, secondNumber] = getValues();
 
     resultField.value = Number(firstNumber) - Number(secondNumber);
 });
 actionMultipl.addEventListener('click', () => {
-    const firstNumber = firstInput.value;
-    const secondNumber = secondInput.value;
-    validateInputValues(firstNumber, secondNumber);
+    const [firstNumber, secondNumber] = getValues();
 
     resultField.value = Number(firstNumber) * Number(secondNumber);
 });
 actionDivision.addEventListener('click', () => {
-    const firstNumber = firstInput.value;
-    const secondNumber = secondInput.value;
-    validateInputValues(firstNumber, secondNumber);
+    const [firstNumber, secondNumber] = getValues();
 
     if (Number(secondNumber) === 0) {
         errorMessage = 'You cannot divide by zero';
